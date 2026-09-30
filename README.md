@@ -1,10 +1,13 @@
-# CastBar
+# CastBar — voor een headless MacBook
 
-**Een MacBook Pro met Touch Bar zonder ingebouwd scherm, toch prettig bruikbaar.**
-Casten naar je tv met één tik op de Touch Bar, een werkende toetsenbordverlichting, en een Mac die in je tas niet
-wakker blijft.
+**Geschikt voor een headless MacBook: een MacBook Pro met Touch Bar zonder (werkend) ingebouwd scherm, toch
+prettig bruikbaar.** Casten naar je tv met één tik op de Touch Bar, een werkende toetsenbordverlichting, en een Mac
+die in je tas niet wakker blijft.
 
-> *English summary:* tools for a 2016–2020 Intel MacBook Pro whose built-in display has been removed:
+Heb je een MacBook met een kapot of verwijderd scherm die je als headless Mac wilt blijven gebruiken, met een
+externe monitor, een tv of helemaal zonder beeld? Dan is dit voor jou.
+
+> *English summary:* tools for running a **headless MacBook**, a 2016–2020 Intel MacBook Pro whose built-in display is broken or has been removed:
 > a Touch Bar button that lists AirPlay and Chromecast screens and mirrors to them with one tap, a fix for the
 > keyboard backlight (the ambient light sensor lived in the display), and a guard that puts the Mac back to sleep
 > when it's woken while locked. The UI automation targets **Dutch** macOS and Chrome; see *Beperkingen*.
