@@ -1,62 +1,59 @@
-# CastBar — voor een headless MacBook
+# CastBar — for a headless MacBook
 
-**Geschikt voor een headless MacBook: een MacBook Pro met Touch Bar zonder (werkend) ingebouwd scherm, toch
-prettig bruikbaar.** Casten naar je tv met één tik op de Touch Bar, een werkende toetsenbordverlichting, en een Mac
-die in je tas niet wakker blijft.
+**Made for a headless MacBook: a Touch Bar MacBook Pro without a (working) built-in display that is still pleasant
+to use.** Cast to your TV with one tap on the Touch Bar, get a working keyboard backlight again, and keep the Mac from
+staying awake in your bag.
 
-Heb je een MacBook met een kapot of verwijderd scherm die je als headless Mac wilt blijven gebruiken, met een
-externe monitor, een tv of helemaal zonder beeld? Dan is dit voor jou.
+Got a MacBook with a broken or removed screen that you want to keep using as a headless Mac, with an external
+monitor, a TV, or no display at all? This is for you.
 
-> *English summary:* tools for running a **headless MacBook**, a 2016–2020 Intel MacBook Pro whose built-in display is broken or has been removed:
-> a Touch Bar button that lists AirPlay and Chromecast screens and mirrors to them with one tap, a fix for the
-> keyboard backlight (the ambient light sensor lived in the display), and a guard that puts the Mac back to sleep
-> when it's woken while locked. The UI automation targets **Dutch** macOS and Chrome; see *Beperkingen*.
+Built by [Atnovix](https://atnovix.com) for a 16" MacBook Pro (2019) whose display broke and was removed. It now runs
+on an external USB-C monitor or casts to a TV.
 
-Gemaakt door [Atnovix](https://atnovix.com) voor een MacBook Pro 16" (2019) waarvan het scherm kapot was en is
-verwijderd. Hij draait nu op een externe USB-C-monitor of cast naar een tv.
+🇳🇱 *Nederlandse samenvatting: zie [In het kort (Nederlands)](#in-het-kort-nederlands) onderaan.*
 
-## Wat zit erin
+## What's inside
 
-| Onderdeel | Wat het doet |
+| Component | What it does |
 |---|---|
-| **CastBar** | Logo in de Control Strip van de Touch Bar. Tik erop en alle schermen op je netwerk verschijnen als knoppen: tik op een tv en je scherm wordt erheen gecast. |
-| **WakeGuard** | Vergrendelde Mac die wakker wordt en niet binnen enkele seconden met Touch ID wordt ontgrendeld, gaat weer slapen. Handig als hij in je tas zit. |
-| **Toetsenbordverlichting** | Zet de automatische helderheid uit, zodat de verlichting weer werkt zonder de lichtsensor uit het scherm. |
-| **Claude-knop** | Tweede knop naast het logo: opent [Claude Code](https://claude.com/claude-code) in Terminal, in de map van het voorste Finder-venster. |
+| **CastBar** | A logo in the Touch Bar's Control Strip. Tap it and every screen on your network shows up as a button; tap a TV and your screen is mirrored to it. |
+| **WakeGuard** | A locked Mac that wakes up and isn't unlocked with Touch ID within a few seconds goes straight back to sleep. Handy when it's in your bag. |
+| **Keyboard backlight** | Turns off automatic brightness so the backlight works again without the ambient light sensor that lived in the display. |
+| **Claude button** | A second button next to the logo: opens [Claude Code](https://claude.com/claude-code) in Terminal, in the folder of the frontmost Finder window. |
 
 ## CastBar
 
-- **AirPlay** (Apple TV, AirPlay-tv's): zet *Synchrone weergave* aan via Bedieningscentrum.
-- **Chromecast / Google TV**: macOS kan zelf niet naar Chromecast casten, dus CastBar gebruikt Google Chrome
-  (*Weergave › Casten… › Bronnen › Scherm casten*) en bevestigt het deelvenster (volledig scherm, systeemaudio mee).
-- Alleen apparaten die beeld kunnen tonen komen in de lijst (AirPlay `features` bit 7, Chromecast `ca` bit 0).
-  Speakers zoals HomePod en Google Home vallen weg. Apparaten die in Chrome alleen "specifieke videosites" kunnen
-  afspelen worden na één poging verborgen.
-- Het apparaat waarnaar je cast wordt **blauw** en er verschijnt een rode **Stop**-knop. Nogmaals op het apparaat
-  tikken stopt ook. **Oranje** = bezig met verbinden of stoppen.
-- Geen monitor aangesloten en nergens mee verbonden? Dan springt de lijst vanzelf open.
+- **AirPlay** (Apple TV, AirPlay TVs): turns on *Screen Mirroring* through Control Center.
+- **Chromecast / Google TV**: macOS can't cast to Chromecast by itself, so CastBar drives Google Chrome
+  (*View › Cast… › Sources › Cast screen*) and confirms the share dialog (entire screen, system audio included).
+- Only devices that can show video are listed (AirPlay `features` bit 7, Chromecast `ca` bit 0), so speakers such
+  as HomePod and Google Home are left out. Devices that Chrome can only use for "specific video sites" are hidden
+  after one attempt.
+- The device you're casting to turns **blue** and a red **Stop** button appears. Tapping the device again stops too.
+  **Orange** means it's connecting or stopping.
+- No monitor attached and nothing connected? The list opens by itself.
 
 ## WakeGuard
 
-Het ontwaken zelf is niet te blokkeren: dat regelt de T2-chip voordat macOS draait. WakeGuard zorgt dat hij snel
-weer gaat slapen als hij vergrendeld blijft:
+Waking itself can't be blocked: the T2 chip handles it before macOS runs. WakeGuard makes sure the Mac goes back to
+sleep quickly if it stays locked:
 
-| Situatie | Tijd om te ontgrendelen |
+| Situation | Time to unlock |
 |---|---|
-| Net vergrendeld | 10 s |
-| Gewekt door de Touch ID-knop (`EC.PowerButton`) | 15 s |
-| Gewekt door toets of trackpad (`EC.KeyboardTouchpad`) | 3 s |
+| Just locked | 10 s |
+| Woken by the Touch ID button (`EC.PowerButton`) | 15 s |
+| Woken by a key or the trackpad (`EC.KeyboardTouchpad`) | 3 s |
 
-Met een monitor aangesloten kun je als reserve je wachtwoord typen: zolang je typt blijft hij wakker, maximaal 45 s.
+With a monitor attached you can still type your password as a fallback: it stays awake while you type, up to 45 s.
 
-## Vereisten
+## Requirements
 
-- Intel MacBook Pro **met Touch Bar** (2016–2020), getest op macOS 14 Sonoma
-- macOS in het **Nederlands** (zie *Beperkingen*)
+- Intel MacBook Pro **with Touch Bar** (2016–2020), tested on macOS 14 Sonoma
+- macOS in **Dutch** (see *Limitations*)
 - Command Line Tools (`xcode-select --install`)
-- Google Chrome, alleen nodig voor Chromecast
+- Google Chrome, only needed for Chromecast
 
-## Installeren
+## Installation
 
 ```sh
 git clone https://github.com/atnovix/castbar.git
@@ -65,76 +62,99 @@ cd castbar
 ```
 
 `install.sh`:
-1. maakt eenmalig een eigen ondertekeningscertificaat *CastBar Local Signing* in je login-sleutelhanger;
-2. bouwt `~/Applications/CastBar.app` en `~/.local/bin/wakeguard`;
-3. zet de LaunchAgents neer, zodat alles bij het inloggen start en na een crash herstart;
-4. zet *Synchrone weergave* vast in de menubalk (CastBar bedient AirPlay via dat menu).
+1. creates a code-signing certificate *CastBar Local Signing* in your login keychain (once);
+2. builds `~/Applications/CastBar.app` and `~/.local/bin/wakeguard`;
+3. installs the LaunchAgents, so everything starts at login and restarts after a crash;
+4. pins *Screen Mirroring* to the menu bar (CastBar drives AirPlay through that menu).
 
-Daarna nog rechten geven in **Systeeminstellingen › Privacy en beveiliging**:
+Then grant permissions in **System Settings › Privacy & Security**:
 
-| Recht | Voor |
+| Permission | For |
 |---|---|
-| Toegankelijkheid | CastBar |
-| Scherm- en systeemaudio-opname | Google Chrome (casten naar Chromecast) |
-| Automatisering › Finder | CastBar (Claude-knop; wordt de eerste keer gevraagd) |
+| Accessibility | CastBar |
+| Screen & System Audio Recording | Google Chrome (casting to Chromecast) |
+| Automation › Finder | CastBar (Claude button; asked the first time) |
 
-Na een codewijziging: `./build.sh` bouwt alleen wat veranderd is en herstart het betreffende onderdeel. Dankzij het
-eigen certificaat blijft het Toegankelijkheid-vinkje dan geldig.
+After changing the code, `./build.sh` rebuilds only what changed and restarts that component. Thanks to the
+certificate, the Accessibility permission stays valid.
 
-## Hoe het werkt
+## How it works
 
-- **Touch Bar**: private API's, dezelfde als [MTMR](https://github.com/Toxblh/MTMR) en
-  [Pock](https://github.com/pock/pock) gebruiken (`NSTouchBarItem addSystemTrayItem:`,
+- **Touch Bar**: private APIs, the same ones [MTMR](https://github.com/Toxblh/MTMR) and
+  [Pock](https://github.com/pock/pock) use (`NSTouchBarItem addSystemTrayItem:`,
   `NSTouchBar presentSystemModalTouchBar:placement:systemTrayItemIdentifier:`,
-  `DFRElementSetControlStripPresenceForIdentifier`). macOS haalt het icoon weg na sluiten of uitklappen van de
-  Control Strip; CastBar zet het terug.
-- **Apparaten zoeken**: Bonjour (`_airplay._tcp`, `_googlecast._tcp`), gefilterd op de TXT-records.
-- **Verbinden**: Toegankelijkheid (AX) bedient het menu *Synchrone weergave* en het cast-venster van Chrome.
-- **Toetsenbordverlichting**: `KeyboardBrightnessClient` uit het private CoreBrightness-framework, via
-  JavaScript for Automation (`osascript -l JavaScript`); er is geen compiler voor nodig.
-- **WakeGuard**: wekreden uit `IOPMrootDomain`, vergrendelstatus uit `CGSessionCopyCurrentDictionary`,
-  `pmset sleepnow` om te slapen.
+  `DFRElementSetControlStripPresenceForIdentifier`). macOS removes the icon when the list is closed or the Control
+  Strip is expanded; CastBar puts it back.
+- **Finding devices**: Bonjour (`_airplay._tcp`, `_googlecast._tcp`), filtered on their TXT records.
+- **Connecting**: Accessibility (AX) drives the *Screen Mirroring* menu and Chrome's cast dialog.
+- **Keyboard backlight**: `KeyboardBrightnessClient` from the private CoreBrightness framework, through
+  JavaScript for Automation (`osascript -l JavaScript`), so no compiler is needed.
+- **WakeGuard**: wake reason from `IOPMrootDomain`, lock state from `CGSessionCopyCurrentDictionary`,
+  `pmset sleepnow` to sleep.
 
-## Beperkingen
+## Limitations
 
-- De automatisering zoekt op **Nederlandse** teksten van macOS en Chrome ("Weergave", "Casten…", "Bronnen",
-  "Scherm casten", "Je volledige scherm delen", "Delen", …). In een andere taal moeten die in `Mirroring.swift` worden
-  aangepast.
-- Private API's kunnen bij een macOS-update veranderen.
-- Een verbinding die buiten CastBar om is gestart, ziet CastBar niet.
-- AirPlay zonder enig scherm (geen monitor, dus geen menubalk) is niet getest.
+- The automation looks for the **Dutch** labels of macOS and Chrome ("Weergave", "Casten…", "Bronnen",
+  "Scherm casten", "Je volledige scherm delen", "Delen", …). For another language, change them in `Mirroring.swift`.
+- Private APIs can change with a macOS update.
+- CastBar doesn't see connections started outside CastBar.
+- AirPlay with no display at all (no monitor, so no menu bar) hasn't been tested.
 
-## Problemen
+## Troubleshooting
 
-**`redefinition of module 'SwiftBridging'` bij bouwen.** Een oudere Command Line Tools-installatie laat
-`/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap` achter, dat botst met `bridging.modulemap`.
-Oplossen:
+**`redefinition of module 'SwiftBridging'` when building.** An older Command Line Tools install leaves
+`/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap` behind, which clashes with
+`bridging.modulemap`. Fix:
 
 ```sh
 sudo mv /Library/Developer/CommandLineTools/usr/include/swift/module.modulemap ~/module.modulemap.bak
 ```
 
-Zonder sudo kan het ook met een kloon (APFS, neemt geen ruimte in); `build.sh` gebruikt die automatisch:
+Without sudo you can use a clone instead (APFS, takes no extra space); `build.sh` picks it up automatically:
 
 ```sh
 cp -cR /Library/Developer/CommandLineTools ~/.local/clt
 rm ~/.local/clt/usr/include/swift/module.modulemap
 ```
 
-**Logo verdwenen uit de Touch Bar.** Klap de Control Strip in; CastBar zet het binnen een paar seconden terug.
+**Logo gone from the Touch Bar.** Collapse the Control Strip; CastBar puts it back within a few seconds.
 
-**Logs**: `~/Library/Logs/castbar.log` en `~/Library/Logs/wakeguard.log`.
+**Logs**: `~/Library/Logs/castbar.log` and `~/Library/Logs/wakeguard.log`.
 
-## Hulpmiddelen
+## Tools
 
-- `tools/axtool dump|press <bundle-id> …`: verken de Toegankelijkheid-boom van een app, of druk op een element.
-- `tools/whiten in.png out.png`: maakt zwarte pixels wit, voor logo's op de zwarte Touch Bar.
+- `tools/axtool dump|press <bundle-id> …`: explore an app's Accessibility tree, or press an element.
+- `tools/whiten in.png out.png`: turns black pixels white, for logos on the black Touch Bar.
 
-## Klepsensor
+## Lid sensor
 
-Er is geen actie nodig. De sensor zit in de onderkant van de laptop en reageert op magneten in het scherm. Zonder
-scherm ziet macOS de klep dus altijd als open (`AppleClamshellState = No`).
+Nothing to do. The sensor sits in the bottom case and reacts to magnets in the display, so without a display macOS
+always sees the lid as open (`AppleClamshellState = No`).
 
-## Licentie
+## In het kort (Nederlands)
+
+**Geschikt voor een headless MacBook**: een MacBook Pro met Touch Bar waarvan het ingebouwde scherm kapot of
+verwijderd is.
+
+- **CastBar**: tik op het logo in de Touch Bar en kies een tv. AirPlay (Apple TV) gaat via *Synchrone weergave*,
+  Chromecast / Google TV via Google Chrome. Blauw = verbonden, nogmaals tikken of **Stop** = stoppen.
+- **WakeGuard**: vergrendeld en niet met Touch ID ontgrendeld? Dan gaat hij binnen enkele seconden weer slapen, ook in
+  je tas.
+- **Toetsenbordverlichting**: werkt weer, ook zonder de lichtsensor uit het scherm.
+
+**Installeren:**
+
+```sh
+git clone https://github.com/atnovix/castbar.git
+cd castbar
+./install.sh
+```
+
+Daarna in **Systeeminstellingen › Privacy en beveiliging**: *Toegankelijkheid* aan voor CastBar, en
+*Scherm- en systeemaudio-opname* aan voor Google Chrome.
+
+**Let op:** de automatisering werkt met een **Nederlandstalige** macOS en Chrome.
+
+## License
 
 [MIT](LICENSE) © Atnovix
